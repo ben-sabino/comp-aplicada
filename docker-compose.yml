@@ -1,0 +1,149 @@
+version: '3.8'
+
+services:
+  # Nó 1 - Nó inicial (Genesis)
+  node1:
+    build: .
+    container_name: naivecoin-node1
+    ports:
+      - "3001:3001"
+      - "6001:6001"
+    environment:
+      - HTTP_PORT=3001
+      - P2P_PORT=6001
+      - NODE_NAME=node1
+    volumes:
+      - ./wallets/node1:/app/node/wallet
+    networks:
+      - blockchain-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/blocks"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Nó 2
+  node2:
+    build: .
+    container_name: naivecoin-node2
+    ports:
+      - "3002:3001"
+      - "6002:6001"
+    environment:
+      - HTTP_PORT=3001
+      - P2P_PORT=6001
+      - P2P_PEERS=ws://node1:6001
+      - NODE_NAME=node2
+    volumes:
+      - ./wallets/node2:/app/node/wallet
+    networks:
+      - blockchain-network
+    depends_on:
+      - node1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/blocks"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Nó 3
+  node3:
+    build: .
+    container_name: naivecoin-node3
+    ports:
+      - "3003:3001"
+      - "6003:6001"
+    environment:
+      - HTTP_PORT=3001
+      - P2P_PORT=6001
+      - P2P_PEERS=ws://node1:6001,ws://node2:6001
+      - NODE_NAME=node3
+    volumes:
+      - ./wallets/node3:/app/node/wallet
+    networks:
+      - blockchain-network
+    depends_on:
+      - node1
+      - node2
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/blocks"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Nó 4
+  node4:
+    build: .
+    container_name: naivecoin-node4
+    ports:
+      - "3004:3001"
+      - "6004:6001"
+    environment:
+      - HTTP_PORT=3001
+      - P2P_PORT=6001
+      - P2P_PEERS=ws://node1:6001,ws://node2:6001,ws://node3:6001
+      - NODE_NAME=node4
+    volumes:
+      - ./wallets/node4:/app/node/wallet
+    networks:
+      - blockchain-network
+    depends_on:
+      - node1
+      - node2
+      - node3
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/blocks"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Nó 5
+  node5:
+    build: .
+    container_name: naivecoin-node5
+    ports:
+      - "3005:3001"
+      - "6005:6001"
+    environment:
+      - HTTP_PORT=3001
+      - P2P_PORT=6001
+      - P2P_PEERS=ws://node1:6001,ws://node2:6001,ws://node3:6001,ws://node4:6001
+      - NODE_NAME=node5
+    volumes:
+      - ./wallets/node5:/app/node/wallet
+    networks:
+      - blockchain-network
+    depends_on:
+      - node1
+      - node2
+      - node3
+      - node4
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/blocks"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Simulador de transações
+  simulator:
+    build:
+      context: .
+      dockerfile: Dockerfile.simulator
+    container_name: naivecoin-simulator
+    networks:
+      - blockchain-network
+    depends_on:
+      - node1
+      - node2
+      - node3
+      - node4
+      - node5
+    volumes:
+      - ./simulation:/app/simulation
+
+networks:
+  blockchain-network:
+    driver: bridge
+
+volumes:
+  wallets:

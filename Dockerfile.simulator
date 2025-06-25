@@ -1,0 +1,15 @@
+FROM node:16-alpine
+
+# Instalar curl para fazer requisições HTTP
+RUN apk add --no-cache curl bash
+
+WORKDIR /app
+
+# Copiar scripts de simulação
+COPY simulation/ ./simulation/
+
+# Tornar os scripts executáveis
+RUN chmod +x ./simulation/*.sh
+
+# Comando padrão para executar a simulação
+CMD ["bash", "./simulation/run_simulation.sh"]
