@@ -1,0 +1,46 @@
+=== RELATÓRIO DE STRESS TEST ===
+Data/Hora: Sat Jun 28 05:43:02 PM -03 2025
+Duração: 300 segundos
+
+=== RESUMO EXECUTIVO ===
+Total de operações: 0
+Total de erros: 0
+Taxa de sucesso geral: %
+
+=== DETALHES POR NÓ ===
+Nó: localhost:3001
+  Operações: 0
+  Erros: 0
+  Taxa de sucesso: 0%
+  Latência média: 0ms
+
+Nó: localhost:3002
+  Operações: 0
+  Erros: 0
+  Taxa de sucesso: 0%
+  Latência média: 0ms
+
+Nó: localhost:3003
+  Operações: 0
+  Erros: 0
+  Taxa de sucesso: 0%
+  Latência média: 0ms
+
+Nó: localhost:3004
+  Operações: 0
+  Erros: 0
+  Taxa de sucesso: 0%
+  Latência média: 0ms
+
+Nó: localhost:3005
+  Operações: 0
+  Erros: 0
+  Taxa de sucesso: 0%
+  Latência média: 0ms
+
+=== ARQUIVOS DE LOG ===
+Log principal: ./stress_test_logs/stress_test.log
+Log de latência: ./stress_test_logs/latency.log
+Log de recursos: ./stress_test_logs/resources.log
+Log de performance: ./stress_test_logs/performance.log
+Relatório: ./stress_test_logs/stress_test_report.txt

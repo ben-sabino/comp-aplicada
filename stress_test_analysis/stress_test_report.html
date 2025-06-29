@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Relatório de Stress Test - NaiveCoin</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .header { background-color: #f0f0f0; padding: 20px; border-radius: 5px; }
+        .section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .metric { display: inline-block; margin: 10px; padding: 10px; background-color: #e8f4f8; border-radius: 3px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .success { color: green; }
+        .error { color: red; }
+        .warning { color: orange; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Relatório de Stress Test - NaiveCoin</h1>
+        <p>Data/Hora: $(date)</p>
+    </div>
+    <div class='section'>
+        <h2>Estatísticas de Latência</h2>
+        <table>
+            <tr><th>Nó</th><th>Operações</th><th>Latência Média (ms)</th><th>Taxa de Sucesso (%)</th></tr>
+            <tr>
+                <td>localhost:3001</td>
+                <td>280</td>
+                <td>28.09</td>
+                <td class='success'>100.00%</td>
+            </tr>
+            <tr>
+                <td>localhost:3002</td>
+                <td>280</td>
+                <td>27.19</td>
+                <td class='success'>100.00%</td>
+            </tr>
+            <tr>
+                <td>localhost:3003</td>
+                <td>280</td>
+                <td>27.12</td>
+                <td class='success'>100.00%</td>
+            </tr>
+            <tr>
+                <td>localhost:3004</td>
+                <td>280</td>
+                <td>27.59</td>
+                <td class='success'>100.00%</td>
+            </tr>
+            <tr>
+                <td>localhost:3005</td>
+                <td>280</td>
+                <td>26.79</td>
+                <td class='success'>100.00%</td>
+            </tr>
+        </table>
+    </div>
+    <div class='section'>
+        <h2>Recursos do Sistema</h2>
+        <div class='metric'>
+            <strong>CPU Média:</strong> 3.47%
+        </div>
+        <div class='metric'>
+            <strong>Memória Média:</strong> 6.37%
+        </div>
+    </div>
+    <div class='section'>
+        <h2>Arquivos de Log</h2>
+        <ul>
+            <li><a href='.././stress_test_logs/latency.log'>Log de Latência</a></li>
+            <li><a href='.././stress_test_logs/resources.log'>Log de Recursos</a></li>
+            <li><a href='.././stress_test_logs/performance.log'>Log de Performance</a></li>
+        </ul>
+    </div>
+</body>
+</html>
